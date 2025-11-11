@@ -1,0 +1,46 @@
+{
+    "name": "empower-interior-server",
+    "version": "1.0.0",
+    "description": "",
+    "main": "dist/src/index.js",
+    "scripts": {
+        "build": "tsc --build",
+        "start:local": "dotenv -e .env.local node dist/src/index.js",
+        "start:prod": "dotenv -e .env.prod node dist/src/index.js",
+        "dev": "nodemon",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@aws-sdk/client-s3": "^3.879.0",
+        "cloudinary": "^2.7.0",
+        "axios": "^1.11.0",
+        "bcrypt": "^6.0.0",
+        "cors": "^2.8.5",
+        "decimal.js": "^10.6.0",
+        "dotenv": "^16.5.0",
+        "drizzle-orm": "^0.44.4",
+        "express": "^5.1.0",
+        "jsonwebtoken": "^9.0.2",
+        "nodemon": "^3.1.10",
+        "pg": "^8.16.3",
+        "uuid": "^11.1.0",
+        "zod": "^3.25.20"
+    },
+    "devDependencies": {
+        "@types/bcrypt": "^5.0.2",
+        "@types/cors": "^2.8.18",
+        "@types/express": "^5.0.2",
+        "@types/jsonwebtoken": "^9.0.9",
+        "@types/node": "^24.10.0",
+        "@types/pg": "^8.15.5",
+        "@types/uuid": "^10.0.0",
+        "dotenv-cli": "^8.0.0",
+        "drizzle-kit": "^0.31.4",
+        "prettier": "^3.6.2",
+        "tsx": "^4.19.4",
+        "typescript": "^5.8.3"
+    }
+}
