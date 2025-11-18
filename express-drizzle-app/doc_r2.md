@@ -1,7 +1,3 @@
-That's an excellent set of constraints for an intern-focused project\! Limiting path variables, enforcing architectural patterns, and making intentional use of shared libraries are core practices for maintainability.
-
-Here is an updated API Best Practices document tailored to your Express/Feature-Based Architecture template, with a focus on code examples and specific suggestions.
-
 -----
 
 # 🛠️ Express Feature-Based API Best Practices
