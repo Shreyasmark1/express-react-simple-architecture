@@ -11,15 +11,15 @@ const decimal = numeric;
 const datetime = timestamp;
 
 const createdAt = () => {
-    return timestamp('created_at', { withTimezone: true, mode: 'string' })
+    return timestamp('created_at', { withTimezone: true, mode: 'date' })
         .defaultNow()
         .notNull();
 }
 
 const updatedAt = () => {
-    return timestamp('updated_at', { withTimezone: true, mode: 'string' })
+    return timestamp('updated_at', { withTimezone: true, mode: 'date' })
         .defaultNow()
-        .$onUpdate(() => new Date().toISOString()) // for pg creates a drizzle middleware not a db trigger 
+        .$onUpdate(() => new Date()) // for pg creates a drizzle middleware not a db trigger 
         .notNull()
 }
 

@@ -2,7 +2,7 @@ import { and, eq } from "drizzle-orm";
 import { Tnx, withTransaction } from "../../lib/db/pg/transaction";
 import { ApiError } from "../../lib/types/api-error";
 import { UserInsert, users } from "../../schemas/user.repository";
-import { OtpUtil } from "../../lib/utils/otp-util";
+import { createOtpUtil } from "../../lib/utils/otp-util";
 import { AppConstants } from "../../config/app-constants";
 import { AccessTokenUtil, TransactionTokenUtil } from "../../lib/jwt/jwt-token-util";
 import { otpAuths } from "../../schemas/auth.repository";
@@ -14,6 +14,8 @@ import { PasswordUtil } from "../../lib/utils/password-util";
 import { wallets } from "../../schemas/wallet.repository";
 import { db } from "../../lib/db/pg/connection";
 import { schedulerJobs, SchedulerJobsInsert } from "../../schemas/scheduler.repository";
+
+const OtpUtil = createOtpUtil(!EnvVariables.isProd)
 
 const sendOtpToMe = async (tnx: Tnx, userId: string) => {
 
@@ -28,7 +30,11 @@ const sendOtpToMe = async (tnx: Tnx, userId: string) => {
 
 const sendOtp = async (tnx: Tnx, mobileNo: string, userId?: string) => {
 
-    const { otp, expiresAt, token, transactionToken } = OtpUtil.generateOtpWithTransactionToken(AppConstants.otpExpiresInMinutes, TransactionTokenUtil.generateToken);
+    const { otp, expiresAt, token, transactionToken } = OtpUtil.generateOtpTransactionToken(
+        OtpUtil.generateOTP(),
+        AppConstants.otpExpiresInMinutes, 
+        TransactionTokenUtil.generateToken
+    );
 
     await tnx.insert(otpAuths).values({ mobileNo, otp, expiresAt, token, isExpired: false, userId }).returning()
 

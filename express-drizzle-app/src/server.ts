@@ -5,8 +5,9 @@ import { ApiError } from "./lib/types/api-error";
 import { globalExceptionHandler } from "./lib/middlewares/global-exception-middleware";
 import { EnvVariables } from "./config/env-helper";
 import { testConnection } from "./lib/db/pg/connection";
-import { AppRouter } from "./app/app.route";
+import { ApiRouter } from "./app/api.route";
 import { AccessTokenUtil } from "./lib/jwt/jwt-token-util";
+import { db } from "./config/db";
 
 export async function startServer() {
     const app = express();
@@ -22,12 +23,12 @@ export async function startServer() {
 
     // routes
     app.get("", __test__)
-    app.use("/api", AppRouter);
+    app.use("/api", ApiRouter);
 
     app.use((_req, _res, next) => next(ApiError.notFound('Route not found')));
     app.use(globalExceptionHandler);
 
-    await testConnection();
+    await testConnection(db);
 
     app.listen(EnvVariables.port, () => console.log(`Server running on PORT: ${EnvVariables.port}!`));
 }

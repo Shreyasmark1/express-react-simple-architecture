@@ -29,5 +29,5 @@ function generateOTP(isTest: boolean) {
 
 export const createOtpUtil = (isTest?: boolean) => ({
     generateOtpTransactionToken,
-    generateOTP: generateOTP(isTest || false)
+    generateOTP: () => generateOTP(isTest || false)
 })

@@ -1,7 +1,6 @@
 import { Pool } from 'pg'; // PostgreSQL client library
 import * as schema from './schema';
-import { drizzle } from 'drizzle-orm/node-postgres';
-import { EnvVariables } from '../../../config/env-helper';
+import { drizzle, NodePgDatabase } from 'drizzle-orm/node-postgres';
 import { sql } from 'drizzle-orm';
 import { ApiError } from '../../types/api-error';
 
@@ -17,15 +16,11 @@ export const dbConnectWithPool = (connectionString: string) => {
 
 export type DbSchema = typeof schema;
 
-export const db = dbConnectWithPool(EnvVariables.dbUrl)
+export type DB = NodePgDatabase<DbSchema> & {
+  $client: Pool;
+}
 
-// export type DB = NodePgDatabase<DbSchema> & {
-//   $client: Pool;
-// }
-
-export type DB = typeof db
-
-export const testConnection = async () => {
+export const testConnection = async (db: DB) => {
     try {
         await db.execute(sql`SELECT 1`);
         console.log("db connected sucessfully");

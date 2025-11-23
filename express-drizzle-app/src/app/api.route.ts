@@ -14,4 +14,4 @@ router.use("/v1/user", UserRouter)
 router.use(requireRole(['admin']))
 router.use("/v1/config", ConfigRouter)
 
-export const AppRouter = router;
+export const ApiRouter = router;
