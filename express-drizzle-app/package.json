@@ -1,5 +1,5 @@
 {
-    "name": "empower-interior-server",
+    "name": "express-drizzle-server",
     "version": "1.0.0",
     "description": "",
     "main": "dist/src/index.js",
@@ -7,6 +7,9 @@
         "build": "tsc --build",
         "start:local": "dotenv -e .env.local node dist/src/index.js",
         "start:prod": "dotenv -e .env.prod node dist/src/index.js",
+        "db:generate": "drizzle-kit generate",
+        "db:migrate": "drizzle-kit migrate",
+        "db:studio": "drizzle-kit studio",
         "dev": "nodemon",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
