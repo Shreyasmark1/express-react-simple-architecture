@@ -9,6 +9,6 @@ const streamToBuffer = (stream: Readable): Promise<Buffer> => {
     });
 }
 
-export const FileStorageUtil = {
+export const StreamUtils = {
     streamToBuffer
 }

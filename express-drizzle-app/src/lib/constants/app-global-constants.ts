@@ -1,9 +1,12 @@
-const imageRootDirectory = "/images";
-const filedRootDirectory = "/files";
-const userRootDirectory = "/users";
+const fileSeparator = "/";
+
+const dirs = {
+    images: "/images",
+    users: "/users",
+    products: "/products"
+}
 
 export const AppGlobalConstants = {
-    imageRootDirectory,
-    filedRootDirectory,
-    userRootDirectory
+    fileSeparator,
+    dirs
 }

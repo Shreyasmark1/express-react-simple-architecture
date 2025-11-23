@@ -1,5 +1,7 @@
+import { UUIDUtil } from "./uuid-generator";
+
 // generate in the format of AA0001
-export function generateNextId(currentId: string): string {
+function generateNextId(currentId: string): string {
 
     if (!/^[A-Z]{2}\d{4}$/.test(currentId)) {
         throw new Error('Invalid format. Expected format: AA0001');
@@ -37,4 +39,16 @@ export function generateNextId(currentId: string): string {
 
     const newPrefix = String.fromCharCode(char1) + String.fromCharCode(char2);
     return `${newPrefix}0001`;
+}
+
+const generateUniqueId = () => {
+  const uuid = UUIDUtil.generate().replace(/-/g, '');
+  // Take a shorter, base-36 representation for human readability
+  // Note: This shortening reduces uniqueness but is still highly secure
+  return uuid.slice(0, 8).toUpperCase();
+}
+
+export const AlphaNumericUtil = {
+    generateNextId,
+    generateUniqueId
 }
